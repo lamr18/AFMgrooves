@@ -20,11 +20,17 @@ end
 from = find(startsWith(headerlines,'[')); % all header sections start with '['
 to = [from(2:end)-1; lines_header]-1; % removes end paragraph break
 
-%header = arrayfun(@x x(from[i]:to[i]),headerlines)
+max_len=max(to-from,[],'all');
+header=string(zeros(length(from),max_len)); %create zeros string array of the size of the nb of sections * the length of the longest section
+
+for i = 1:length(from)
+    for j = 1:(to(i)-from(i))
+        header(i,j) = headerlines(from(i)+j-1);
+    end
+end
 
 outputArg1 = len_header;
-outputArg2 = headerlines;
-
+outputArg2 = header;
 
 end
 
