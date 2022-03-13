@@ -1,6 +1,7 @@
 function [outputArg1,outputArg2] = import_file(filename,imageNo)
 %IMPORT_FILE imports NanoSurf .nid AFM files
-% 
+% This function imports the file, creates a formatted header and a frame
+% with all of the chosen image's data.
 
 % add file extension check
 [filepath,name,ext] = fileparts(filename);
@@ -42,9 +43,9 @@ y_nm=repmat(linspace(Dim1Min,Dim1Min+Dim1Range,Dim1Length),[1 Dim1Length]);
 
 frame.x=x(:);
 frame.y=y(:);
+frame.z=binlines;
 frame.x_nm=x_nm(:)*1e9;
 frame.y_nm=y_nm(:)*1e9;
-frame.z=binlines;
 frame.z_nm=binlines*(Dim2Range/(Dim0Length*Dim1Length))*1e9;
 
 outputArg1 = frame;
