@@ -30,9 +30,9 @@ Dim1Length=get_image_info(header,imageNo,'Lines',1);
 Dim2Bits=get_image_info(header,imageNo,'SaveBits',1);
 
 %pre-allocate memory to frame
-vartype={'double','double','double','double','double'};
-varname={'x','y','x_nm','y_nm','z_nm'};
-frame=table('Size',[length(binlines) 5],'VariableTypes',vartype,'VariableNames', varname); 
+vartype={'double','double','double','double','double','double'};
+varname={'x','y','z','x_nm','y_nm','z_nm'};
+frame=table('Size',[length(binlines) 6],'VariableTypes',vartype,'VariableNames', varname); 
 
 %build frame
 x=repelem(1:Dim0Length,Dim0Length);
@@ -44,6 +44,7 @@ frame.x=x(:);
 frame.y=y(:);
 frame.x_nm=x_nm(:)*1e9;
 frame.y_nm=y_nm(:)*1e9;
+frame.z=binlines;
 frame.z_nm=binlines*(Dim2Range/(Dim0Length*Dim1Length))*1e9;
 
 outputArg1 = frame;
