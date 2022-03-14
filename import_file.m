@@ -4,7 +4,7 @@ function [outputArg1,outputArg2] = import_file(filename,imageNo)
 % with all of the chosen image's data.
 
 % add file extension check
-[filepath,name,ext] = fileparts(filename);
+[~,~,ext] = fileparts(filename);
 if ext~='.nid'
     error('This file format is not supported. Please input a .nid file.')
 end
@@ -14,13 +14,8 @@ end
 binlines = read_images(filename,header,len_header,imageNo); %load z data
 
 %Image info
-Dim0Unit=get_image_info(header,imageNo,'Dim0Unit',0);
-Dim1Unit=get_image_info(header,imageNo,'Dim1Unit',0);
-Dim2Unit=get_image_info(header,imageNo,'Dim2Unit',0);
-
 Dim0Min=get_image_info(header,imageNo,'Dim0Min',1);
 Dim1Min=get_image_info(header,imageNo,'Dim1Min',1);
-Dim2Min=get_image_info(header,imageNo,'Dim2Min',1);
 
 Dim0Range=get_image_info(header,imageNo,'Dim0Range',1);
 Dim1Range=get_image_info(header,imageNo,'Dim1Range',1);
@@ -46,7 +41,7 @@ frame.y=y(:);
 frame.z=binlines;
 frame.x_nm=x_nm(:)*1e9;
 frame.y_nm=y_nm(:)*1e9;
-frame.z_nm=binlines*(Dim2Range/(Dim0Length*Dim1Length))*1e9;
+frame.z_nm=binlines*(Dim2Range/(2^Dim2Bits))*1e9;
 
 outputArg1 = frame;
 outputArg2 = header;
