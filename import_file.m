@@ -1,4 +1,4 @@
-function [outputArg1,outputArg2] = import_file(filename,imageNo)
+function [outputArg1,outputArg2, outputArg3] = import_file(filename,imageNo)
 %IMPORT_FILE imports NanoSurf .nid AFM files
 % This function imports the file, creates a formatted header and a frame
 % with all of the chosen image's data.
