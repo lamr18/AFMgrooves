@@ -11,17 +11,17 @@ end
 
 if pixel==true
     imagesc(C)
-    colormap(gray)
+    colormap(gray);
     c=colorbar;
-    c.Title.String = 'z (µm)'
-    c.FontSize=16
-    set(gca,'YDir','normal')
-    labx=xlabel('x (pixels)')
-    labx.FontSize = 16
-    laby=ylabel('y (pixels)')
-    laby.FontSize = 16
-    set(gca,'fontsize',14)
-    axis square
+    c.Title.String = 'z (µm)';
+    c.FontSize=16;
+    set(gca,'YDir','normal');
+    labx=xlabel('x (pixels)');
+    labx.FontSize = 16;
+    laby=ylabel('y (pixels)');
+    laby.FontSize = 16;
+    set(gca,'fontsize',14);
+    axis square;
     %title(sprintf('AFM map of image %d',imageNo))
 else
     x=linspace(min(frame.x_nm),max(frame.x_nm),max(frame.x))/1e3;
@@ -29,37 +29,36 @@ else
     [X,Y]=meshgrid(x,y); %create mesh in µm
     %2D map
     figure(1)
-    set(gcf,'defaultSurfaceEdgeColor','g')
     pcolor(X,Y,C)
-    shading flat
-    colormap(gray)
+    shading flat;
+    colormap(gray);
     c=colorbar;
-    c.Title.String = 'z (µm)'
-    c.FontSize=16
-    axis square
-    labx=xlabel('x (µm)')
-    labx.FontSize = 16
-    laby=ylabel('y (µm)')
-    laby.FontSize = 16
-    set(gca,'fontsize',14)
-    box off
+    c.Title.String = 'z (µm)';
+    c.FontSize=16;
+    axis square;
+    labx=xlabel('x (µm)');
+    labx.FontSize = 16;
+    laby=ylabel('y (µm)');
+    laby.FontSize = 16;
+    set(gca,'fontsize',14);
+    box off;
     %title(sprintf('AFM map of image %d',imageNo))
 
     %3D map
     figure(2)
     surf(X,Y,C)
-    shading flat
-    colormap(gray)
+    shading flat;
+    colormap(gray);
     c=colorbar;
-    c.Title.String = 'z (µm)'
-    c.FontSize=16
-    labx=xlabel('x (µm)')
-    labx.FontSize = 16
-    laby=ylabel('y (µm)')
-    laby.FontSize = 16
-    set(gca,'fontsize',14)
-    axis square
-    box on
+    c.Title.String = 'z (µm)';
+    c.FontSize=16;
+    labx=xlabel('x (µm)');
+    labx.FontSize = 16;
+    laby=ylabel('y (µm)');
+    laby.FontSize = 16;
+    set(gca,'fontsize',14);
+    axis square;
+    box on;
     %title(sprintf('AFM map of image %d',imageNo))
 end
 
