@@ -30,10 +30,11 @@ varname={'x','y','z','x_nm','y_nm','z_nm'};
 frame=table('Size',[length(binlines) 6],'VariableTypes',vartype,'VariableNames', varname); 
 
 %Build frame
-x=repmat(1:info('x.pixels'),[1 info('x.pixels')]);
-x_nm=repmat(linspace(Dim0Min,Dim0Min+Dim0Range,info('x.pixels')),[1 info('x.pixels')]);
-y=repelem(1:info('y.pixels'),info('y.pixels'));
-y_nm=repelem(linspace(Dim1Min,Dim1Min+Dim1Range,info('y.pixels')),info('y.pixels'));
+
+x=repelem(1:info('x.pixels'),info('x.pixels'));
+x_nm=repelem(linspace(Dim0Min,Dim0Min+Dim0Range,info('x.pixels')),info('x.pixels'));
+y=repmat(1:info('y.pixels'),[1 info('y.pixels')]);
+y_nm=repmat(linspace(Dim1Min,Dim1Min+Dim1Range,info('y.pixels')),[1 info('y.pixels')]);
 
 frame.x=x(:);
 frame.y=y(:);
