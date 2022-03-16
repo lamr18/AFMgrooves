@@ -9,8 +9,8 @@ function [outputArg1, outputArg2] = read_header(filename)
 
 all_lines = readlines(filename);
 lines_header = find(contains(all_lines,'#!'))-1; % tells us where the data section starts and how many lines there are in the header
+lines_header=lines_header(1);
 headerlines = all_lines(1:(lines_header)); % truncate the data beyond the end of the header
-
 % counts characters in the header
 len_header = 0; 
 for k = 1:lines_header
