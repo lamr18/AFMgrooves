@@ -1,4 +1,4 @@
-function [outputArg1,outputArg2,outputArg3] = GB_detection(info,C,gridsize)
+function [outputArg1,outputArg2,outputArg3] = GB_detection(info,C,gridsize,aspect_ratio)
 %GB_Detection This function detects grain boundaries and saves their
 %locations
 %   Detailed explanation goes here
@@ -20,14 +20,17 @@ for k=1:(length(s)-1)
        
         %seg_median=median(segment,'all')% compute average of the segment
         seg_min=min(segment,[],'all'); % compute min of the segment
-        if seg_min<(av*0.85) %discard segment if its average is above the total median
-            %mask=zeros(size(segment)
-            % );
-            Mask=segment<(seg_min*1.05);
-            segmentsthrough(end+1)=tot;
-            gb_detection(s(l):s(l+1),s(k):s(k+1))= Mask;
-
-
+        if seg_min<(av*0.92) %discard segment if its average is above the total median
+            Mask=segment<(seg_min*1.02);
+            if aspect_ratio==true
+                pass=seg_aspect_ratio(Mask);
+            else
+                pass=true;
+            end
+            if pass==true % for segments that pass the checks:
+                segmentsthrough(end+1)=tot;
+                gb_detection(s(l):s(l+1),s(k):s(k+1))= Mask;
+            end
         end
     end
 end
@@ -35,7 +38,7 @@ imshow(gb_detection)
 set(gca,'YDir','normal');
 
 outputArg1 = gb_detection;
-outputArg2 = segment;
-outputArg3=segmentsthrough;
+outputArg2 = tot;
+outputArg3 = segmentsthrough;
 end
 
