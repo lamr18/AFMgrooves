@@ -7,30 +7,34 @@ tot=0;
 segmentsthrough=[];
 av=median(C,"all");
 s=linspace(1,info('x.pixels'),gridsize);
+gb_detection=zeros(length(C));
 for k=1:(length(s)-1)
     for l=1:(length(s)-1)
         tot=tot+1;%total number of segments
-        figure(tot);
+        %figure(tot);
         segment=C(s(l):s(l+1),s(k):s(k+1));
-        imagesc(segment);
-        colormap(gray);
-        c=colorbar;
-        set(gca,'YDir','normal');
+        %imagesc(segment);
+        %colormap(gray);
+        %c=colorbar;
+        %set(gca,'YDir','normal');
        
         %seg_median=median(segment,'all')% compute average of the segment
-        seg_min=min(segment,[],'all') % compute min of the segment
-
-
+        seg_min=min(segment,[],'all'); % compute min of the segment
         if seg_min<(av*0.85) %discard segment if its average is above the total median
-            %mask=zeros(size(segment));
-            Mask=segment<(seg_min*1.02);
+            %mask=zeros(size(segment)
+            % );
+            Mask=segment<(seg_min*1.05);
             segmentsthrough(end+1)=tot;
+            gb_detection(s(l):s(l+1),s(k):s(k+1))= Mask;
+
 
         end
     end
 end
+imshow(gb_detection)
+set(gca,'YDir','normal');
 
-outputArg1 = Mask;
+outputArg1 = gb_detection;
 outputArg2 = segment;
 outputArg3=segmentsthrough;
 end
