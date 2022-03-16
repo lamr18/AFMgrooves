@@ -1,4 +1,4 @@
-function plot_image(frame,imageNo,pixel)
+function [outputArg1]=plot_image(frame,imageNo,pixel)
 %PLOT_IMAGE Plots the input image 
 % Creates an array of the image values and plots it with either pixel or nm
 % axes
@@ -61,6 +61,6 @@ else
     box on;
     %title(sprintf('AFM map of image %d',imageNo))
 end
-
+outputArg1=C;
 end
 
