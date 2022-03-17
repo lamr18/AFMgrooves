@@ -1,6 +1,15 @@
-function [outputArg1] = get_line(info,pixels)
+function [outputArg1] = get_line(info,pixels,GB)
 %GET_LINE Summary of this function goes here
 %   Detailed explanation goes here
+
+if GB==true
+    key_label1='GB_pixels';
+    key_label2='GB_lengths';
+else 
+    key_label1='perp_line_pixels';
+    key_label2='perp_line_lengths';
+end
+
 width.x=info('x.pixels');
 width.y=info('y.pixels');
 
@@ -37,19 +46,19 @@ if startpixel(1)==endpixel(1)
         return
     end
 
-    if mean(contains(info.keys,('line_pixels')))==0
-        info('line_pixels')={r1};
-        info('line_lengths')={r2};
+    if mean(contains(info.keys,(key_label1)))==0
+        info(key_label1)={r1};
+        info(key_label2)={r2};
     else
         %add line pixels
-        line_pixels=info('line_pixels');
+        line_pixels=info(key_label1);
         line_pixels{end+1}=r1;
-        info('line_pixels')=line_pixels;
+        info(key_label1)=line_pixels;
 
         %add line lengths
-        line_lengths=info('line_lengths');
+        line_lengths=info(key_label2);
         line_lengths{end+1}=r2;
-        info('line_lengths')=line_lengths;
+        info(key_label2)=line_lengths;
     end
     outputArg1=info;
     return
@@ -68,9 +77,6 @@ q2=0;
 r2=[q2];
 
 while (pix(1)~=endpixel(1) || pix(2)~=endpixel(2))
-%while pix(2)~=endpixel(2) %stops when you reach endpixel
-    %disp(pix)
-    %disp(endpixel)
     er2=2*er;
     lx=0;
     ly=0;
@@ -96,19 +102,19 @@ if length(r2)<10
     return
 end
 
-if mean(contains(info.keys,('line_pixels')))==0
-    info('line_pixels')={r1};
-    info('line_lengths')={r2};
+if mean(contains(info.keys,(key_label1)))==0
+    info(key_label1)={r1};
+    info(key_label2)={r2};
 else
     %add line pixels
-    line_pixels=info('line_pixels');
+    line_pixels=info(key_label1);
     line_pixels{end+1}=r1;
-    info('line_pixels')=line_pixels;
+    info(key_label1)=line_pixels;
 
     %add line lengths
-    line_lengths=info('line_lengths');
+    line_lengths=info(key_label2);
     line_lengths{end+1}=r2;
-    info('line_lengths')=line_lengths;
+    info(key_label2)=line_lengths;
 
 end
 
