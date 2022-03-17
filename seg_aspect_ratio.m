@@ -27,7 +27,7 @@ minvaluey=min(coordsleft(2),coordsright(2));
 maxvaluey=max(coordsleft(2),coordsright(2));
 
 density=mean(mask(minvaluex:maxvaluex,minvaluey:maxvaluey),'all');    
-if (0.1<density && density<0.4)==1
+if (0.01<density && density<0.65)==1
     pass = true;
 else
     pass = false;
