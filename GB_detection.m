@@ -6,9 +6,10 @@ function [outputArg1,outputArg2,outputArg3] = GB_detection(info,C,gridsize,aspec
 tot=0;
 segmentsthrough=[];
 av=median(C,"all");
-s=linspace(1,info('x.pixels'),gridsize);
+s=linspace(1,info('x.pixels')+1,gridsize+1);
 gb_detection=zeros(length(C));
 list_GBs={[0]};
+%disp(s)
 
 for k=1:(length(s)-1)
     for l=1:(length(s)-1)
@@ -27,20 +28,20 @@ for k=1:(length(s)-1)
             
             %frame
             if tot==1
-                Mask(1:15,:)=0;
-                Mask(:,1:15)=0;
+                Mask(1:20,:)=0;
+                Mask(:,1:20)=0;
 
             elseif tot==(gridsize-1)
-                Mask((end-15):end,:)=0;
-                Mask(:,1:15)=0;
+                Mask((end-20):end,:)=0;
+                Mask(:,1:20)=0;
 
             elseif tot==((gridsize-1)^2-gridsize)
-                Mask(1:15,:)=0;
-                Mask(:,(end-15):end)=0;
+                Mask(1:20,:)=0;
+                Mask(:,(end-20):end)=0;
 
             elseif tot==(gridsize-1)^2
-                Mask((end-15):end,:)=0;
-                Mask(:,(end-15):end)=0;
+                Mask((end-20):end,:)=0;
+                Mask(:,(end-20):end)=0;
 
             end
 
@@ -63,6 +64,7 @@ for k=1:(length(s)-1)
                 pixels(:,2)=pixels(:,2)+s(k);
                 segmentsthrough(end+1)=tot;
                 gb_detection(s(l):(s(l+1)-1),s(k):(s(k+1)-1))= Mask;
+                gb_detection(s(l):(s(l+1)-1),(s(k+1)-1))=0;
                 list_GBs(end+1)={pixels};
             end
         end
@@ -73,10 +75,10 @@ list_GBs=list_GBs(2:end);
 info('list_GBs')=list_GBs;
 
 %clear the edges with a frame of '0'
-gb_detection(1:15,:)=0;
-gb_detection((end-15):end,:)=0;
-gb_detection(:,1:15)=0;
-gb_detection(:,(end-15):end)=0;
+gb_detection(1:20,:)=0;
+gb_detection((end-20):end,:)=0;
+gb_detection(:,1:20)=0;
+gb_detection(:,(end-20):end)=0;
 
 imshow(gb_detection)
 set(gca,'YDir','normal');
