@@ -5,7 +5,7 @@ function [outputArg1] = get_line(info,pixels,GB)
 if GB==true
     key_label1='GB_pixels';
     key_label2='GB_lengths';
-else 
+elseif GB==false 
     key_label1='perp_line_pixels';
     key_label2='perp_line_lengths';
 end
@@ -41,7 +41,7 @@ if startpixel(1)==endpixel(1)
         r1(end+1,:)=[endpixel(1),i];
     end
     
-    if length(r2)<10
+    if length(r2)<15
         outputArg1=info;
         return
     end
@@ -97,7 +97,7 @@ while (pix(1)~=endpixel(1) || pix(2)~=endpixel(2))
     r2(end+1,:)= q2;
 end
 
-if length(r2)<10
+if length(r2)<15
     outputArg1 = info;
     return
 end
