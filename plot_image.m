@@ -6,11 +6,11 @@ function [outputArg1]=plot_image(frame,imageNo,pixel)
 %Create array of the z_nm values of size(pixels.x, pixels.y)
 C=zeros(max(frame.x));
 for i = 1:(length(frame.z_nm))
-    C(frame.x(i),frame.y(i))=frame.z_nm(i)/1e3;
+    C(frame.x(i),frame.y(i))=frame.z_nm(i);
 end
 
 if pixel==true
-    imagesc(C)
+    imagesc(C/1e3)
     colormap(gray);
     c=colorbar;
     c.Title.String = 'z (µm)';
@@ -29,7 +29,7 @@ else
     [X,Y]=meshgrid(x,y); %create mesh in µm
     %2D map
     figure(1)
-    pcolor(X,Y,C)
+    pcolor(X,Y,C/1e3)
     shading flat;
     colormap(gray);
     c=colorbar;
@@ -46,7 +46,7 @@ else
 
     %3D map
     figure(2)
-    surf(X,Y,C)
+    surf(X,Y,C/1e3)
     shading flat;
     colormap(gray);
     c=colorbar;
