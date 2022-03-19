@@ -46,7 +46,7 @@ frame.y=y(:);
 frame.z=binlines;
 frame.x_nm=x_nm(:)*1e9;
 frame.y_nm=y_nm(:)*1e9;
-frame.z_nm=xyzlines*1e9;
+frame.z_nm=xyzlines;
 
 %Add information to 'info' container
 info('x.conv')=(max(frame.x_nm))/(max(frame.x-1));
