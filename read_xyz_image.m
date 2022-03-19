@@ -19,6 +19,8 @@ all_lines=sortrows(all_lines);
 
 all_lines=all_lines(:,3);
 
+%make sure all z values are in nm
+all_lines=all_lines/10^-9;
 outputArg1 = all_lines;
 end
 
