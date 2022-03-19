@@ -1,4 +1,4 @@
-function [outputArg1 outputArg2]= perp_line(info,Nblines,line_length)
+function [outputArg1 outputArg2]= perp_line(info,Nblines,line_half_length)
 %PERP_LINE Draws the lines perpendicular to the GBs  Summary of this function goes here
 %   Detailed explanation goes here
 info1=info;
@@ -39,10 +39,10 @@ for i=1:length(GB_pixels)
         mx=-1*Dy/sqrt(Dy^2+Dx^2);
         my=1*Dx/sqrt(Dy^2+Dx^2);
 
-        perp_pixels(1,1)=round(GB_pix(rand_pix(j),1)+(mx)*line_length);
-        perp_pixels(1,2)=round(GB_pix(rand_pix(j),2)+(my)*line_length);
-        perp_pixels(2,1)=round(GB_pix(rand_pix(j),1)-(mx)*line_length);
-        perp_pixels(2,2)=round(GB_pix(rand_pix(j),2)-(my)*line_length);
+        perp_pixels(1,1)=round(GB_pix(rand_pix(j),1)+(mx)*line_half_length);
+        perp_pixels(1,2)=round(GB_pix(rand_pix(j),2)+(my)*line_half_length);
+        perp_pixels(2,1)=round(GB_pix(rand_pix(j),1)-(mx)*line_half_length);
+        perp_pixels(2,2)=round(GB_pix(rand_pix(j),2)-(my)*line_half_length);
         
         %disp(perp_pixels)
         if ((perp_pixels(1,1)<1) || (perp_pixels(1,2)<1) || (perp_pixels(2,1)<1) || (perp_pixels(2,2)<1) || ...
