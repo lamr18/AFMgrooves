@@ -1,4 +1,4 @@
-function [outputArg1] = get_line(info,pixels,GB)
+function [outputArg1] = get_line(info,pixels,GB,GBno)
 %GET_LINE Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -116,6 +116,17 @@ else
     line_lengths{end+1}=r2;
     info(key_label2)=line_lengths;
 
+end
+
+if GB==false
+    if mean(contains(info.keys,('perp_whichGB')))==0
+        info('perp_whichGB')={GBno};
+    else
+        %add line pixels
+        perp_whichGB=info('perp_whichGB');
+        perp_whichGB{end+1}=GBno;
+        info('perp_whichGB')=perp_whichGB;
+    end
 end
 
 outputArg1 = info;
