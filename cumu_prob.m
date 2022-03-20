@@ -31,33 +31,113 @@ colorlines=sortrows(colorlines);
 colorlines=colorlines(:,2);
 colorlines(end+1)=colorlines(end);
 
+%Plot symmetric profile information(normal format)
 diha=symm_tab.dihedral_angle;
 gar=symm_tab.gamma_ratio;
-[cumul_pb_symm, diha]=ecdf(gar);
+[cumul_pb_symm, cumu_diha]=ecdf(diha);
 figure(1)
-scatter(diha, cumul_pb_symm)
-labx=xlabel('\gamma_{GB} / \gamma_S');
+scatter(cumu_diha, cumul_pb_symm)
+%labx=xlabel('\gamma_{GB} / \gamma_S');
+labx=xlabel('Dihedral angle (°)');
 labx.FontSize = 16;
 laby=ylabel('Cumulative probability');
 laby.FontSize = 16;
 axis square;
-title(sprintf('Distribution of thermal groove energy for symmetric profiles'))
+axis([0 180 0 1]);
+%title(sprintf('Distribution of thermal groove energy for symmetric profiles'))
+%title({sprintf('Distribution of thermal groove energy for symmetric profiles'),sprintf('for %d segments and %d profiles',max(colorlines),length(perp_line_pixels))})
 set(gca,'fontsize',15);
+box on
 
+%Plot non symmetric profile information (normal format)
 diha=nosymm_tab.dihedral_angle;
 gar=nosymm_tab.gamma_ratio;
-[cumul_pb_nosymm, diha]=ecdf(gar);
-disp(cumul_pb_nosymm(end))
-disp(diha(end))
+%[cumul_pb_nosymm, cumu_gar]=ecdf(gar);
+[cumul_pb_nosymm, cumu_diha]=ecdf(diha);
+figure(3)
+scatter(cumu_diha,cumul_pb_nosymm)
+%scatter(cumu_diha, cumul_pb_nosymm,50,colorlines,'filled')
+%labx=xlabel('\gamma_{GB} / \gamma_S');
+labx=xlabel('Dihedral angle (°)');
+%labx.FontSize = 16;
+laby=ylabel('Cumulative probability');
+laby.FontSize = 16;
+axis square;
+axis([0 180 0 1]);
+%title({sprintf('Distribution of thermal groove energy for non symmetric profiles'),sprintf('for %d segments and %d profiles',max(colorlines),length(perp_line_pixels)*2)})
+set(gca,'fontsize',15);
+%ax1=gca;
+box on
+%ax2=axes('Position',ax1.Position,'XAxisLocation','top','XDir','reverse','YAxisLocation','right','color','none');
+%hold(ax2,'on')
+%axis square;
+%set(ax2,'fontsize',15);
+%ax2.YAxis.Visible = 'off';
+%labx.FontSize = 16;
+%cumu_gar=2*cosd(cumu_diha/2);
+%scatter(ax2,cumu_gar,cumul_pb_nosymm)
+%hold(ax2,'off')
+
+%Plot non symmetric profile information with different GB colors
+diha=nosymm_tab.dihedral_angle;
+gar=nosymm_tab.gamma_ratio;
+%[cumul_pb_nosymm, cumu_gar]=ecdf(gar);
+[cumul_pb_nosymm, cumu_diha]=ecdf(diha);
 figure(2)
-scatter(diha, cumul_pb_nosymm,50,colorlines,'filled')
-labx=xlabel('\gamma_{GB} / \gamma_S');
+%scatter(cumu_diha,cumul_pb_nosymm)
+scatter(cumu_diha, cumul_pb_nosymm,50,colorlines,'filled')
+%labx=xlabel('\gamma_{GB} / \gamma_S');
+labx=xlabel('Dihedral angle (°)');
 labx.FontSize = 16;
 laby=ylabel('Cumulative probability');
 laby.FontSize = 16;
 axis square;
-title(sprintf('Distribution of thermal groove energy for non symmetric profiles'))
+axis([0 180 0 1]);
+%title({sprintf('Distribution of thermal groove energy for non symmetric profiles'),sprintf('for %d segments and %d profiles',max(colorlines),length(perp_line_pixels)*2)})
 set(gca,'fontsize',15);
+box on
+
+%Average value plot for non symmetric profiles
+avnosymm_tab=table('Size',[max(colorlines) 6],'VariableTypes',vartype,'VariableNames', varname);
+
+for i=1:max(colorlines)
+    %disp(i)
+    d_mean=0;
+    w_mean=0;
+    beta_mean=0;
+    diha_mean=0;
+    gar_mean=0;
+    count=0;
+    for j=1:height(nosymm_tab)
+        %disp(j)
+        if nosymm_tab.lineno(j)==i
+            %disp(nosymm_tab.lineno(j))
+            w_mean=w_mean+nosymm_tab.width(j);
+            d_mean=d_mean+nosymm_tab.depth(j);
+            beta_mean=beta_mean+nosymm_tab.beta(j);
+            diha_mean=diha_mean+nosymm_tab.dihedral_angle(j);
+            gar_mean=gar_mean+nosymm_tab.gamma_ratio(j);
+            count=count+1;
+        end
+    end
+    avnosymm_tab(i,:)=num2cell([w_mean/count d_mean/count beta_mean/count diha_mean/count gar_mean/count i]);
+end
+colorsav=1:max(avnosymm_tab.lineno)-1;
+
+diha=avnosymm_tab.dihedral_angle;
+[cumul_pb_avnosymm, cumu_diha]=ecdf(diha);
+figure(4)
+scatter(cumu_diha, cumul_pb_avnosymm,50,colorsav,'filled')
+%labx=xlabel('\gamma_{GB} / \gamma_S');
+labx=xlabel('Dihedral angle (°)');
+labx.FontSize = 16;
+laby=ylabel('Cumulative probability');
+laby.FontSize = 16;
+axis square;
+axis([0 180 0 1]);
+%title({sprintf('Distribution of thermal groove energy for non symmetric profiles'),sprintf('for %d segments averaged over %d segments',length(perp_line_pixels)*2,max(colorsav))})
+set(gca,'fontsize',15);
+box on
 
 outputArg1 = symm_tab;
 outputArg2 = nosymm_tab;

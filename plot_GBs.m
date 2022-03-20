@@ -25,7 +25,6 @@ for i=1:length(line_pixels)
     end
 end
 
-
 imshow(GB_act_lines)
 set(gca,'YDir','normal');
 labx=xlabel('x (pixels)');

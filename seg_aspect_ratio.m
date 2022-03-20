@@ -26,19 +26,21 @@ maxvaluex=max(coordsleft(1),coordsright(1));
 minvaluey=min(coordsleft(2),coordsright(2));
 maxvaluey=max(coordsleft(2),coordsright(2));
 
-density=mean(mask(minvaluex:maxvaluex,minvaluey:maxvaluey),'all');    
-if (0.01<density && density<0.65)==1
+density=mean(mask(minvaluex:maxvaluex,minvaluey:maxvaluey),'all');
+%disp(density)
+if (density>0.001 && density<0.7)
     pass = true;
+    %disp(density)
 else
     pass = false;
     %pixels=[0 0; 0 0];
 end
 
-if coordsleft(1)==coordsright(1)
-    pass=true;
-elseif coordsleft(2)==coordsright(2)
-    pass=true;
-end
+%if coordsleft(1)==coordsright(1)
+%    pass=true;
+%elseif coordsleft(2)==coordsright(2)
+%    pass=true;
+%end
 
 outputArg1 = pass;
 outputArg2 = pixels;
