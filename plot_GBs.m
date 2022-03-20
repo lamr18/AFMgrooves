@@ -11,7 +11,7 @@ end
 for i=1:length(list_GBs)
     %obtain the pixels of the GB
     edgepixels=list_GBs{i};
-    info = get_line(info,edgepixels,true);
+    info = get_line(info,edgepixels,true,0);
 end
 
 GB_act_lines=zeros(info('x.pixels'));
