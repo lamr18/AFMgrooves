@@ -6,16 +6,20 @@ function [outputArg1,outputArg2,outputArg3] = GB_detection(info,C,gridsize,aspec
 tot=0;
 segmentsthrough=[];
 av=median(C,"all");
-s=linspace(1,info('x.pixels')+1,gridsize+1);
+
+sz=floor(info('x.pixels')/gridsize);
+s=linspace(0,sz*(gridsize-1),gridsize)+1;
+s(end+1)=info('x.pixels');
+
+%s=linspace(1,info('x.pixels')+1,gridsize+1);
 gb_detection=zeros(length(C));
 list_GBs={[0]};
-%disp(s)
 
 for k=1:(length(s)-1)
     for l=1:(length(s)-1)
         tot=tot+1;%total number of segments
         %figure(tot);
-        segment=C(s(l):(s(l+1)-1),s(k):(s(k+1)-1));
+        segment=C(s(l):(s(l+1)),s(k):(s(k+1)));
         %imagesc(segment);
         %colormap(gray);
         %c=colorbar;
@@ -30,25 +34,29 @@ for k=1:(length(s)-1)
             if tot==1
                 Mask(1:20,:)=0;
                 Mask(:,1:20)=0;
+                %Mask(:)=0;
 
             elseif tot==(gridsize-1)
                 Mask((end-20):end,:)=0;
                 Mask(:,1:20)=0;
+                %Mask(:)=0;
 
-            elseif tot==((gridsize-1)^2-gridsize)
-                Mask(1:20,:)=0;
-                Mask(:,(end-20):end)=0;
+            elseif tot==(((gridsize-1)^2)-gridsize+2)
+                %Mask(1:20,:)=0;
+                %Mask(:,(end-20):end)=0;
+                Mask(:)=0;
 
             elseif tot==(gridsize-1)^2
                 Mask((end-20):end,:)=0;
                 Mask(:,(end-20):end)=0;
-
+                %Mask(:)=0;
             end
 
             if mean(Mask,'all')==0
                 continue
             end
-
+            segmentsthrough(end+1)=tot;
+            
             if aspect_ratio==true
                 [pass pixels]=seg_aspect_ratio(Mask);
                 if pass==false
@@ -62,9 +70,8 @@ for k=1:(length(s)-1)
             if (mean(pixels,'all')~=0 && pass~=false)==true % for segments that pass the checks
                 pixels(:,1)=pixels(:,1)+s(l);
                 pixels(:,2)=pixels(:,2)+s(k);
-                segmentsthrough(end+1)=tot;
-                gb_detection(s(l):(s(l+1)-1),s(k):(s(k+1)-1))= Mask;
-                gb_detection(s(l):(s(l+1)-1),(s(k+1)-1))=0;
+               
+                gb_detection(s(l):(s(l+1)),s(k):(s(k+1)))= Mask;
                 list_GBs(end+1)={pixels};
             end
         end
@@ -72,6 +79,10 @@ for k=1:(length(s)-1)
 end
 
 list_GBs=list_GBs(2:end);
+if mean(contains(info.keys,('list_GBs')))~=0
+    remove(info,'list_GBs');
+end
+
 info('list_GBs')=list_GBs;
 
 %clear the edges with a frame of '0'
