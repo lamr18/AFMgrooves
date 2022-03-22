@@ -9,6 +9,7 @@ GB_pixels=info1('GB_pixels');
 if mean(contains(info1.keys,('perp_line_pixels')))~=0
     remove(info1,'perp_line_pixels');
     remove(info1,'perp_line_lengths');
+    remove(info1,'perp_whichGB');
 end
 
 
