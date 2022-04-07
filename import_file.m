@@ -12,10 +12,10 @@ end
 [len_header, header]=read_header(filename); %load header
 binlines = read_images(filename,header,len_header,imageNo); %load z data
 
-%Load essential info
+%Create container to hold essential information
 info=file_info(filename, header, imageNo);
 
-%Image info
+%Read image info to fill the info container from above
 Dim0Min=get_image_info(header,imageNo,'Dim0Min',1);
 Dim1Min=get_image_info(header,imageNo,'Dim1Min',1);
 Dim0Range=get_image_info(header,imageNo,'Dim0Range',1);
@@ -29,18 +29,17 @@ varname={'x','y','z','x_nm','y_nm','z_nm'};
 frame=table('Size',[length(binlines) 6],'VariableTypes',vartype,'VariableNames', varname); 
 
 %Build frame
+x=repelem(1:info('x.pixels'),info('x.pixels')); %range of pixels from 1 to max pixel
+x_nm=repelem(linspace(Dim0Min,Dim0Min+Dim0Range,info('x.pixels')),info('x.pixels')); % same as above but in nm
+y=repmat(1:info('y.pixels'),[1 info('y.pixels')]); %range of pixels from 1 to max pixel
+y_nm=repmat(linspace(Dim1Min,Dim1Min+Dim1Range,info('y.pixels')),[1 info('y.pixels')]); % same as above but in nm
 
-x=repelem(1:info('x.pixels'),info('x.pixels'));
-x_nm=repelem(linspace(Dim0Min,Dim0Min+Dim0Range,info('x.pixels')),info('x.pixels'));
-y=repmat(1:info('y.pixels'),[1 info('y.pixels')]);
-y_nm=repmat(linspace(Dim1Min,Dim1Min+Dim1Range,info('y.pixels')),[1 info('y.pixels')]);
-
-frame.x=x(:);
+frame.x=x(:); 
 frame.y=y(:);
-frame.z=binlines;
+frame.z=binlines; %data from binlines
 frame.x_nm=x_nm(:)*1e9;
 frame.y_nm=y_nm(:)*1e9;
-frame.z_nm=binlines*(Dim2Range/(2^Dim2Bits))*1e9;
+frame.z_nm=binlines*(Dim2Range/(2^Dim2Bits))*1e9; %data from binlines converted to nm
 
 %Add information to 'info' container
 info('x.conv')=(max(frame.x_nm))/(max(frame.x-1));

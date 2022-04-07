@@ -1,15 +1,16 @@
 function [outputArg1]=plot_image(frame,imageNo,pixel)
-%PLOT_IMAGE Plots the input image 
-% Creates an array of the image values and plots it with either pixel or nm
-% axes
+%PLOT_IMAGE Plots the input image. Creates an array of the image values and 
+% plots it with either pixel (2D plot) or nm axes (2D + 3D plots). 
+% It outputs the matrix used for the plot as it is used for GB detection.
 
-%Create array of the z_nm values of size(pixels.x, pixels.y)
+%Create array from the z_nm values of size(pixels.x, pixels.y).
+
 C=zeros(max(frame.x));
 for i = 1:(length(frame.z_nm))
     C(frame.x(i),frame.y(i))=frame.z_nm(i);
 end
 
-if pixel==true
+if pixel==true %Plot with pixel axes, 3D view not permitted with 'imagesc'
     imagesc(C/1e3)
     colormap(gray);
     c=colorbar;
@@ -23,7 +24,7 @@ if pixel==true
     set(gca,'fontsize',14);
     axis square;
     %title(sprintf('AFM map of image %d',imageNo))
-else
+else %Plots with nm axes
     x=linspace(min(frame.x_nm),max(frame.x_nm),max(frame.x))/1e3;
     y=linspace(min(frame.y_nm),max(frame.y_nm),max(frame.y))/1e3;
     [X,Y]=meshgrid(x,y); %create mesh in µm
