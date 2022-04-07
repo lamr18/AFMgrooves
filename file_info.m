@@ -1,5 +1,5 @@
 function [outputArg1] = file_info(filename,header,imageNo)
-%FILE_INFO Returns the essential information relative to the imported file.
+%FILE_INFO Returns the essential information relative to the imported file and image.
 % Parses through the header to return chosen information
 
 k={'filename','history','Instrument','Imaging Mode', 'x.pixels', 'y.pixels', 'x.unit', 'y.unit', 'z.unit'};
