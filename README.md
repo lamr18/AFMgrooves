@@ -37,7 +37,7 @@ The main function 'groove_analysis' takes input arguments:
 - `avpct`: Real number below 1, usually between 0.90 and 0.98. Used to skip segments where the min value is significantly higher than the average for the image. This is targetted to remove segments of the image that contain high plateaux or peaks.
 - `minpct`: Real number above 1, usually between 1.01 and 1.2. Used to mask values that are far from the minimum of the segment. The shape of a thermally grooved grain boundary sees the GB running at the bottom, which will be detected as the minimum and not masked by the function.
 - `Nblines`: Integer. Controls the number of lines drawn through each grain boundary line. 
-- `line_half_length`: Integer. Controls the length in pixels of either side of a perpendicular line. This should be optimized to best suite the grain size and groove width.
+- `line_half_length`: Integer. Controls the length in pixels of either side of a perpendicular line. This should be optimized to best suit the grain size and groove width.
 
 It is recommended to optimize the threshold parameters prior to running the automated analysis using 'groove_analysis'. 
 
