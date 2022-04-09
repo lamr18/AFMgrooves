@@ -1,5 +1,4 @@
 # AFMgrooves
- 
 MATLAB tool developed for the analysis of thermally grooved grain boundaries. It analyzes .nid Nanosurf AFM files and .xyz files exported from Gwyddion.
 
 ## Installation
@@ -9,15 +8,13 @@ Make sure to add the 'MATLAB' folder to your MATLAB path.
 
 
 ## Function
-This 
+This package has been developed to facilitate the analysis of thermally grooved grain boundaries and of their energy. The usual manual method for this measurement is tedious, time consumming and can give rise to error from inaccuracies in drawing perpendicular lines. Instead, this package simplifies the process and removes user errors.
 
-The geometry of the thermally grooved grain boundary can be used to calculate grain boundary energy to surface energy ratio, as explained below. This is what the package sets out to automate. 
+The interest in thermally grooved grain boundaries stems from their relation to grain boundary energy. The geometry of a thermally grooved grain boundary can be used to calculate the grain boundary energy to surface energy ratio, as explained below. This is what the package sets out to automate. 
 ![Screenshot](Images/GB_groove_geometry.png)
 
-Profiles can be analyzed in two different ways: either one GBE ratio can be extracted from a symmetric profile, or two GBE ratios can be extracted from an asymmetric profile.
+Profiles across grain boundaries can be analyzed in two different ways: either one GBE ratio can be extracted from a symmetric profile, or two GBE ratios can be extracted from an asymmetric profile, as depicted below.
 ![Screenshot](Images/Profiles.png)
-
-
 
 
 ## Usage
