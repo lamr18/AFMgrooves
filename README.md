@@ -2,8 +2,7 @@
 MATLAB tool developed for the analysis of thermally grooved grain boundaries. It analyzes .nid Nanosurf AFM files and .xyz files exported from Gwyddion.
 
 ## Installation
-To install this package, 
-
+To install this package, simply clone the GitHub repository in MATLAB using Source Control > Clone Git Repository, and using URL=https://github.com/lamr18/AFMgrooves
 Make sure to add the 'MATLAB' folder to your MATLAB path.
 
 
