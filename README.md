@@ -11,6 +11,8 @@ Make sure to add the 'MATLAB' folder to your MATLAB path.
 ## Function
 This 
 
+The geometry of the thermally grooved grain boundary can be used to calculate grain boundary energy to surface energy ratio, as explained below. This is what the package sets out to automate. 
+![Screenshot](Images/GB_groove_geometry.png)
 
 
 ## Usage
