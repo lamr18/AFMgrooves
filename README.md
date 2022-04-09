@@ -14,6 +14,11 @@ This
 The geometry of the thermally grooved grain boundary can be used to calculate grain boundary energy to surface energy ratio, as explained below. This is what the package sets out to automate. 
 ![Screenshot](Images/GB_groove_geometry.png)
 
+Profiles can be analyzed in two different ways: either one GBE ratio can be extracted from a symmetric profile, or two GBE ratios can be extracted from an asymmetric profile.
+![Screenshot](Images/Profiles.png)
+
+
+
 
 ## Usage
 The package provides an automated solution to GB groove analysis in the form of the 'groove_analysis' function. This function is integrated within the package and calls the relevant functions.
