@@ -16,6 +16,9 @@ The interest in thermally grooved grain boundaries stems from their relation to 
 Profiles across grain boundaries can be analyzed in two different ways: either one GBE ratio can be extracted from a symmetric profile, or two GBE ratios can be extracted from an asymmetric profile, as depicted below.
 ![Screenshot](Images/Profiles.png)
 
+The overall workflow of the package is quite simple, and can be broken down into 4 stages.
+![Screenshot](Images/Workflow.png)
+
 
 ## Usage
 The package provides an automated solution to GB groove analysis in the form of the 'groove_analysis' function. This function is integrated within the package and calls the relevant functions.
