@@ -45,8 +45,8 @@ Example files and plots are provided in the 'Tutorial' folder.
 
 #### Ouputs
 The function outputs several plots:
-- a 2D and a 3D view of the AFM image
-- a 2D plot of the GB detection mask, GB lines and perpendicular profile lines
-- 
+- a 2D and a 3D view of the AFM image.
+- a 2D plot of the GB detection mask, GB lines and perpendicular profile lines.
+- four titled plots of different cumulative probability distributions calculated from the data.
 
 
