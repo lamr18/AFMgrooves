@@ -1,5 +1,5 @@
 # AFMgrooves
-MATLAB tool developed for the analysis of thermally grooved grain boundaries. It analyzes .nid Nanosurf AFM files and .xyz files exported from Gwyddion.
+The AFMgrooves package is a MATLAB tool developed for the analysis of thermally grooved grain boundaries. It analyzes .nid Nanosurf AFM files and .xyz files exported from Gwyddion.
 
 This package was developed as a MEng thesis project in Dr Katharina Marquardt's group at Imperial College London.
 
