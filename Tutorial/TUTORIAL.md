@@ -4,7 +4,7 @@ This tutorial contains two example files which can be used to test the installat
 ## 2016 file
 The 'Plots' folder contains different plots produced from the analysis of this file. Specifically,  it contains the plots outputted by the 'groove_analysis' function. It also contains a file with plots produced from the variation of user inputted GB detection parameters. It is recommended for the user to test different parameters and understand how to best choose parameters for this file and their own files.
 
-An example call for the 2016 file is:
+**This is the example call** for the 2016 file is:
 `groove_analysis('NF_P_02016.nid','NF_P_02016_MPS.xyz',1, 7, false, 0.95, 1.015, 10,40);`
 
 Make sure you have added the 'Script' folder to the MATLAB path.
