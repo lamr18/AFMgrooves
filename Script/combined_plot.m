@@ -13,7 +13,7 @@ for i=1:length(line_pixels)
     pixels_shade=line_pixels{i};
     for j=1:length(pixels_shade)
         pix=pixels_shade(j,:);
-        gb_detection(pix(1),pix(2))=0.27; % set to 0.27 for contrast, any number could be chosen
+        gb_detection(pix(1),pix(2))=18; % set to 0.27 for contrast, any number could be chosen
     end
 end
 
@@ -23,7 +23,7 @@ for i=1:length(perp_line_pixels)
     pixels_shade=perp_line_pixels{i};
     for j=1:length(pixels_shade)
         pix=pixels_shade(j,:);
-        gb_detection(pix(1),pix(2))=0.8; % set to 0.8 for contrast, any number could be chosen
+        gb_detection(pix(1),pix(2))=16; % set to 0.8 for contrast, any number could be chosen
     end
 end
 
@@ -36,6 +36,32 @@ laby.FontSize = 16;
 axis square;
 title(sprintf('GB detection for avpct= 0.950 and minpct= 1.012'))
 set(gca,'fontsize',15);
+
+if mean(contains(info.keys,('perp_whichGB')))~=0
+    perp_GBno=info('perp_whichGB');
+    %Goes through the info packet and shades the pixels that belong to a perp line
+    perp_line_pixels=info('perp_line_pixels');
+    for i=1:length(perp_line_pixels)
+        pixels_shade=perp_line_pixels{i};
+        for j=1:length(pixels_shade)
+            pix=pixels_shade(j,:);
+            gb_detection(pix(1),pix(2))=perp_GBno{i}; % set to 0.8 for contrast, any number could be chosen
+        end
+    end
+    
+    imagesc(gb_detection)
+    set(gca,'YDir','normal');
+    labx=xlabel('x (pixels)');
+    labx.FontSize = 16;
+    laby=ylabel('y (pixels)');
+    laby.FontSize = 16;
+    axis square;
+    title(sprintf('GB detection for avpct= 0.950 and minpct= 1.012'))
+    set(gca,'fontsize',15);
+
+else
+    disp('No GB numbers assigned')
+end
 
 end
 

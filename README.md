@@ -6,7 +6,7 @@ This package was developed as a MEng thesis project in Dr Katharina Marquardt's 
 ## Installation
 To install this package, simply clone the GitHub repository in MATLAB using Source Control > Clone Git Repository, and URL = https://github.com/lamr18/AFMgrooves.
 
-Make sure to add the 'MATLAB' folder to your MATLAB path.
+Make sure to add the 'Scripts' folder to your MATLAB path.
 
 
 ## Function

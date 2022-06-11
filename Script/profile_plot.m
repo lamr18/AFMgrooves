@@ -50,7 +50,7 @@ w_lr=abs(perp_line_len(l_Imax(end))-perp_line_len(r_Imax(1)+i_min(1)-1))/2; %hal
 beta_lr=atand(4.6*d_lr/(0.974*2*w_lr)); %geom angle beta from Robertson
 halfdi_lr=90-beta_lr;  %geom angle half of psi (dihedral angle)
 en_ratio_lr=2*cosd(halfdi_lr); %energy ratio
-geom_en(3,:)=[w_lr d_lr beta_lr (2*halfdi_lr) en_ratio_lr lineno]; %combine all the info
+geom_en(3,:)=[2*w_lr d_lr beta_lr (2*halfdi_lr) en_ratio_lr lineno]; %combine all the info
 
 outputArg1=geom_en;
 end

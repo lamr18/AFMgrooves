@@ -108,6 +108,7 @@ end
 avnosymm_tab=rmmissing(avnosymm_tab);
 colorsav=avnosymm_tab.lineno;
 colorsav(end+1)=colorsav(end)+1;
+disp(colorsav)
 counter(1)=counter(2);
 
 figure(7)
