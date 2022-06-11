@@ -7,7 +7,7 @@ The 'Plots' folder contains different plots produced from the analysis of this f
 An example call for the 2016 file is:
 `groove_analysis('NF_P_02016.nid','NF_P_02016_MPS.xyz',1, 7, false, 0.95, 1.015, 10,40);`
 
-Make sure you have added the pacakage's 'Script' folder to the MATLAB path.
+Make sure you have added the 'Script' folder to the MATLAB path.
 
 ## 2017 file
 The user can also use this file to test parameters. The only plot provided for this file is a 2D view. 

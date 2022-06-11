@@ -5,8 +5,9 @@ This package was developed as a MEng thesis project in Dr Katharina Marquardt's 
 
 ## Installation
 To install this package, simply clone the GitHub repository in MATLAB using Source Control > Clone Git Repository, and URL = https://github.com/lamr18/AFMgrooves.
+You also need to install the 'Statistics and Machine Learning Toolbox', available from URL = https://uk.mathworks.com/products/statistics.html
 
-Make sure to add the 'Scripts' folder to your MATLAB path.
+Make sure to add the 'Script' folder to your MATLAB path in order to run the commands from your data folder, by right clicking on the 'Script' folder and selecting 'Add to Path'.
 
 
 ## Function
