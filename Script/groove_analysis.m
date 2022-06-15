@@ -1,5 +1,5 @@
 function symm_tab=groove_analysis(filenamenid, filenamexyz, imageNo, gridsize, aspect_ratio, avpct, minpct,Nblines,line_half_length)
-%GROOVE_ANALYSIS This function is the allows for the automated analysis of AFM images of thermal grooves. 
+%GROOVE_ANALYSIS This function allows for the automated analysis of AFM images of thermal grooves. 
 %It calls the correct functions from the AFM grooves package.
 %This function can only be used with square images, where x pixels = y pixels
 [~,~,extxyz] = fileparts(filenamexyz);
