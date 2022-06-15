@@ -34,7 +34,7 @@ labx.FontSize = 16;
 laby=ylabel('y (pixels)');
 laby.FontSize = 16;
 axis square;
-title(sprintf('GB detection for avpct= 0.950 and minpct= 1.012'))
+title(sprintf('GB detection for '))
 set(gca,'fontsize',15);
 
 if mean(contains(info.keys,('perp_whichGB')))~=0
@@ -56,7 +56,7 @@ if mean(contains(info.keys,('perp_whichGB')))~=0
     laby=ylabel('y (pixels)');
     laby.FontSize = 16;
     axis square;
-    title(sprintf('GB detection for avpct= 0.950 and minpct= 1.012'))
+    title(sprintf('GB detection for %d profiles over %d detected segments',length(perp_line_pixels),length(line_pixels)))
     set(gca,'fontsize',15);
 
 else
