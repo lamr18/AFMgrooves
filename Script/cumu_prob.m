@@ -56,75 +56,80 @@ title({sprintf('Distribution of thermal groove energy for %d non symmetric profi
 set(gca,'fontsize',15);
 box on
 
-%Attach a color to a GBno
-colorlines=[nosymm_tab.dihedral_angle nosymm_tab.lineno];
-colorlines=sortrows(colorlines);
-colorlines=unique(colorlines,'rows');
-firstline=[nosymm_tab.dihedral_angle(1) nosymm_tab.lineno(1)];
-colorlines=[firstline;colorlines];
-colorlines=colorlines(:,2);
-
-%Plot non symmetric profile information with data point colors
-%corresponding to GBno
-figure(6)
-diha=nosymm_tab.dihedral_angle;
-[cumul_pb_nosymm, cumu_diha]=ecdf(diha);
-scatter(cumu_diha, cumul_pb_nosymm,50,colorlines,'filled')
-xlabel('Dihedral angle (°)');
-ylabel('Cumulative probability');
-axis square;
-%axis([80 180 0 1]);
-title({sprintf('Distribution of thermal groove energy for non symmetric profiles'),sprintf('for %d segments and %d profiles',max(colorlines),length(perp_line_pixels)*2)})
-set(gca,'fontsize',15);
-box on
-
-%Average value plot for non symmetric profiles
-avnosymm_tab=table('Size',[max(colorlines) 6],'VariableTypes',vartype,'VariableNames', varname);
-
-counter={0};
-for i=1:max(colorlines) %Compute the mean value of all the asymmetric profiles taken across a single GB line
-    d_mean=0;
-    w_mean=0;
-    beta_mean=0;
-    diha_mean=0;
-    gar_mean=0;
-    count=0;
-    for j=1:height(nosymm_tab)
-        if nosymm_tab.lineno(j)==i
-            w_mean=w_mean+nosymm_tab.width(j);
-            d_mean=d_mean+nosymm_tab.depth(j);
-            beta_mean=beta_mean+nosymm_tab.beta(j);
-            diha_mean=diha_mean+nosymm_tab.dihedral_angle(j);
-            gar_mean=gar_mean+nosymm_tab.gamma_ratio(j);
-            count=count+1;
-        end
-    end
-    if count~=0
-        counter{end+1}=count;
-    end
-    avnosymm_tab(i,:)=num2cell([w_mean/count d_mean/count beta_mean/count diha_mean/count gar_mean/count i]);
-end
-%Attach a color to a GBno
-avnosymm_tab=rmmissing(avnosymm_tab);
-colorsav=avnosymm_tab.lineno;
-colorsav(end+1)=colorsav(end)+1;
-disp(colorsav)
-counter(1)=counter(2);
-
-figure(7)
-diha=avnosymm_tab.dihedral_angle;
-[cumul_pb_avnosymm, cumu_diha]=ecdf(diha);
-scatter(cumu_diha, cumul_pb_avnosymm,50,colorsav,'filled')
-for i=1:length(cumu_diha)
-    text((cumu_diha(i)+0.015),(cumul_pb_avnosymm(i)+0.015),string(counter(i))); % label the datapoints
-end
-xlabel('Dihedral angle (°)');
-ylabel('Cumulative probability');
-axis square;
-%axis([80 180 0 1]);
-title({sprintf('Distribution of thermal groove energy for non symmetric profiles'),sprintf('for %d segments averaged over %d segments',length(perp_line_pixels)*2,max(colorsav))})
-set(gca,'fontsize',15);
-box on
+% %Attach a color to a GBno
+% colorlines=[nosymm_tab.dihedral_angle nosymm_tab.lineno];
+% colorlines=sortrows(colorlines);
+% colorlines=unique(colorlines,'rows');
+% %firstline=[nosymm_tab.dihedral_angle(1) nosymm_tab.lineno(1)];
+% %colorlines=[firstline;colorlines];
+% colorlines=colorlines(:,2);
+% colorlines(sum(isnan(colorlines), 2) == 1, :) = [];
+% size(colorlines)
+% 
+% %Plot non symmetric profile information with data point colors
+% %corresponding to GBno
+% figure(6)
+% diha=nosymm_tab.dihedral_angle;
+% [cumul_pb_nosymm, cumu_diha]=ecdf(diha);
+% size(cumul_pb_nosymm)
+% scatter(cumu_diha, cumul_pb_nosymm,50,colorlines,'filled')
+% xlabel('Dihedral angle (°)');
+% ylabel('Cumulative probability');
+% axis square;
+% %axis([80 180 0 1]);
+% title({sprintf('Distribution of thermal groove energy for non symmetric profiles'),sprintf('for %d segments and %d profiles',max(colorlines),length(perp_line_pixels)*2)})
+% set(gca,'fontsize',15);
+% box on
+% 
+% %Average value plot for non symmetric profiles
+% avnosymm_tab=table('Size',[max(colorlines) 6],'VariableTypes',vartype,'VariableNames', varname);
+% 
+% counter={0};
+% for i=1:max(colorlines) %Compute the mean value of all the asymmetric profiles taken across a single GB line
+%     d_mean=0;
+%     w_mean=0;
+%     beta_mean=0;
+%     diha_mean=0;
+%     gar_mean=0;
+%     count=0;
+%     for j=1:height(nosymm_tab)
+%         if nosymm_tab.lineno(j)==i
+%             w_mean=w_mean+nosymm_tab.width(j);
+%             d_mean=d_mean+nosymm_tab.depth(j);
+%             beta_mean=beta_mean+nosymm_tab.beta(j);
+%             diha_mean=diha_mean+nosymm_tab.dihedral_angle(j);
+%             gar_mean=gar_mean+nosymm_tab.gamma_ratio(j);
+%             count=count+1;
+%         end
+%     end
+%     if count~=0
+%         counter{end+1}=count;
+%     end
+%     avnosymm_tab(i,:)=num2cell([w_mean/count d_mean/count beta_mean/count diha_mean/count gar_mean/count i]);
+% end
+% %Attach a color to a GBno
+% avnosymm_tab=rmmissing(avnosymm_tab);
+% colorsav=avnosymm_tab.lineno;
+% colorsav(end+1)=colorsav(end)+1;
+% disp(colorsav)
+% counter(1)=counter(2)
+% colorlines(sum(isnan(colorlines), 2) == 1, :) = [];
+% 
+% figure(7)
+% diha=avnosymm_tab.dihedral_angle;
+% [cumul_pb_avnosymm, cumu_diha]=ecdf(diha);
+% size(cumul_pb_avnosymm)
+% scatter(cumu_diha, cumul_pb_avnosymm,50,colorsav,'filled')
+% for i=1:length(cumu_diha)
+%     text((cumu_diha(i)+0.015),(cumul_pb_avnosymm(i)+0.015),string(counter(i))); % label the datapoints
+% end
+% xlabel('Dihedral angle (°)');
+% ylabel('Cumulative probability');
+% axis square;
+% %axis([80 180 0 1]);
+% title({sprintf('Distribution of thermal groove energy for non symmetric profiles'),sprintf('for %d segments averaged over %d segments',length(perp_line_pixels)*2,max(colorsav))})
+% set(gca,'fontsize',15);
+% box on
 
 outputArg1 = symm_tab;
 outputArg2 = nosymm_tab;
