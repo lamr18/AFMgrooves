@@ -3,12 +3,12 @@
 %This function can only be used with square images, where x pixels = y pixels
 
 %Add Script folder to path to call the function from any file folder
-userpath='/Users/louiserosset/Documents/GitHub/AFMgrooves'; % Path to AFM package eg. '/Users/louiserosset/Documents/GitHub/AFMgrooves'
+userpath=; % Path to AFM package eg. '/Users/louiserosset/Documents/GitHub/AFMgrooves'
 addpath (strcat(userpath,'/Script'))
 
 % User inputs
-filenamenid='NF_P_02016.nid';
-filenamexyz='NF_P_02016_MPS.xyz';
+filenamenid= % eg.'NF_P_02017.nid';
+filenamexyz= % eg.'NF_P_02017_MPS.xyz';
 imageNo=1;
 gridsize=7;
 aspect_ratio=false;
